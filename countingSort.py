@@ -1,25 +1,29 @@
-def countingSort(array):
-    size = len(array)
+def countingSort(input):
+    size = len(input)
     output = [0] * size
-    count = [0] * 10
+
+    max = input[0]
+    for i in range(1,len(input)):
+        if max < input[i]:
+            max = input[i]
+    
+    count = [0] * (max+1)
 
     for i in range(0, size):
-        count[array[i]] += 1
-
-    for i in range(1, 10):
+        count[input[i]] += 1
+        
+    for i in range(1, max+1):
         count[i] += count[i - 1]
-
+        
     i = size - 1
     while i >= 0:
-        output[count[array[i]] - 1] = array[i]
-        count[array[i]] -= 1
+        output[count[input[i]] - 1] = input[i]
+        count[input[i]] -= 1
         i -= 1
-
-    for i in range(0, size):
-        array[i] = output[i]
+        
+    print(output)
 
 
 data = [4, 2, 2, 8, 3, 3, 1]
-countingSort(data)
-print("Sorted Array in Ascending Order: ")
 print(data)
+countingSort(data)
